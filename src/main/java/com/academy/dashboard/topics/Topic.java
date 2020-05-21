@@ -4,11 +4,13 @@ public class Topic {
     private String id;
     private String title;
     private String difficulty;
+    private String courseId;
 
-    public Topic(String id, String title, String difficulty) {
+    public Topic(String id, String title, String difficulty, String courseId) {
         this.id = id;
         this.title = title;
         this.difficulty = difficulty;
+        this.courseId = courseId;
     }
 
     public String getId() {
@@ -33,5 +35,13 @@ public class Topic {
 
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 }
