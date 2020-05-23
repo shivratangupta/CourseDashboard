@@ -1,67 +1,42 @@
 package com.academy.dashboard.courses;
 
-import com.academy.dashboard.topics.Topic;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CourseService {
-    List<Course> courses;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     public CourseService() {
-        courses = new ArrayList<>();
-        courses.add(new Course("1", "Data Structures"));
-        courses.add(new Course("2", "LLD"));
-        courses.add(new Course("3", "HLD"));
-        courses.add(new Course("4", "DBMS"));
-        courses.add(new Course("5", "Computer Networks"));
     }
 
     public List<Course> getAllCourses() {
-        return courses;
+        return (List<Course>) courseRepository.findAll();
     }
 
-    public Course getCourse(String id) {
-        for(Course course: courses) {
-            if(course.getId().equals(id))
-                return course;
-        }
-        return null;
+    public Optional<Course> getCourse(String id) {
+        return courseRepository.findById(id);
     }
 
     public void addCourse(Course course) {
-        courses.add(course);
+        courseRepository.save(course);
     }
 
     public void editCourse(String id, Course course) {
-        for(int i=0; i<courses.size(); i++) {
-            if(courses.get(i).getId().equals(id)) {
-                courses.set(i, course);
-                return;
-            }
-        }
+        courseRepository.save(course);
     }
 
     public void removeAllCourses() {
-        courses.clear();
+        courseRepository.deleteAll();
     }
 
     public void removeCourse(String id) {
-        for(Course course: courses) {
-            if(course.getId().equals(id)) {
-                courses.remove(course);
-                return;
-            }
-        }
-    }
-
-    public List<Topic> getTopics(String courseId) {
-        for(Course course: courses) {
-            if(course.getId().equals(courseId))
-                return course.getTopics();
-        }
-        return null;
+        courseRepository.deleteById(id);
     }
 }

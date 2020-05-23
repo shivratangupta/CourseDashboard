@@ -2,18 +2,24 @@ package com.academy.dashboard.courses;
 
 import com.academy.dashboard.topics.Topic;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Course {
+
+    @Id
     private String id;
     private String title;
-    private List<Topic> topics;
+
+    public Course() {
+    }
 
     public Course(String id, String title) {
         this.id = id;
         this.title = title;
-        topics = new ArrayList<>();
     }
 
     public String getId() {
@@ -30,13 +36,5 @@ public class Course {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public List<Topic> getTopics() {
-        return topics;
-    }
-
-    public void setTopics(List<Topic> topics) {
-        this.topics = topics;
     }
 }

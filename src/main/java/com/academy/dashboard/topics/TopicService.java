@@ -1,62 +1,41 @@
 package com.academy.dashboard.topics;
 
-import com.academy.dashboard.courses.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TopicService {
 
     @Autowired
-    CourseService courseService;
+    private TopicRepository topicRepository;
 
     public TopicService() {
     }
 
     public List<Topic> getTopics(String courseId) {
-        return courseService.getTopics(courseId);
+        return topicRepository.findByCourseId(courseId);
     }
 
-    public Topic getTopic(String courseId, String topicId) {
-        List<Topic> topics = courseService.getTopics(courseId);
-        for(Topic topic: topics) {
-            if(topic.getId().equals(topicId))
-                return topic;
-        }
-        return null;
+    public Optional<Topic> getTopic(String topicId) {
+        return topicRepository.findById(topicId);
     }
 
-    public void addTopic(String courseId, Topic topic) {
-        List<Topic> topics = courseService.getTopics(courseId);
-        topics.add(topic);
+    public void addTopic(Topic topic) {
+        topicRepository.save(topic);
     }
 
-    public void editTopic(String courseId, String topicId, Topic topic) {
-        List<Topic> topics = courseService.getTopics(courseId);
-        for(int i=0; i<topics.size(); i++) {
-            Topic topic1 = topics.get(i);
-            if(topic1.getId().equals(topicId)) {
-                topics.set(i, topic);
-                return;
-            }
-        }
+    public void editTopic(String topicId, Topic topic) {
+        topicRepository.save(topic);
     }
 
     public void removeAllTopics(String courseId) {
-        List<Topic> topics = courseService.getTopics(courseId);
-        topics.clear();
+        topicRepository.deleteByCourseId(courseId);
     }
 
-    public void removeTopic(String courseId, String topicId) {
-        List<Topic> topics = courseService.getTopics(courseId);
-        for(Topic topic: topics) {
-            if(topic.getId().equals(topicId)) {
-                topics.remove(topic);
-                return;
-            }
-        }
+    public void removeTopic(String topicId) {
+        topicRepository.deleteById(topicId);
     }
 }
