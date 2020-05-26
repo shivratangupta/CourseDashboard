@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Academy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-$END$
+    <div style="margin:10px; padding=10px;">
+        <h1>Here is the list of courses!</h1>
+        <ul th:each="course: ${courses}">
+            <a th:href="@{'/courses/' + ${course.id}}">
+                <li th:text="${course.title}"></li>
+            </a>
+        </ul>
+    </div>
 </body>
 </html>

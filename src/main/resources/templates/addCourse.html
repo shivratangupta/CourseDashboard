@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Academy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-$END$
+    <div style="margin: 10px; padding=10px;">
+        <form method="post" action="/courses">
+            <input type="number" name="id" style="margin: 10px; padding=10px;">
+            <label style="margin: 10px; padding=10px;">ID</label> <br>
+            <input type="text" name="title" style="margin: 10px; padding=10px;">
+            <label style="margin: 10px; padding=10px;">Title</label> <br>
+            <button type="submit" style="margin: 10px; padding=10px;">Add Course</button>
+        </form>
+    </div>
 </body>
 </html>
